@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import {
+	View,
+	Text,
+	StyleSheet,
+	Pressable,
+	TouchableOpacity,
+} from "react-native";
 import React from "react";
 import { LinearGradient, LinearGradientPoint } from "expo-linear-gradient";
 
@@ -22,22 +28,45 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 		<>
 			{linearGradient ? (
 				<LinearGradient
-					style={styles.container}
+					style={[
+						styles.container,
+						{ position: "relative", zIndex: -1 },
+					]}
 					locations={linearGradient.locations}
 					start={linearGradient.start}
 					colors={linearGradient.colors}
 				>
-					<Pressable onPress={onPress} style={styles.pressable}>
-						<Text style={styles.text}>{text}</Text>
-					</Pressable>
+					<TouchableOpacity
+						style={[
+							// styles.container,
+							{ width: "100%", position: "relative", zIndex: 1 },
+						]}
+						onPress={() => {}}
+					>
+						<Pressable
+							onPress={onPress}
+							style={styles.pressable}
+							android_ripple={{
+								color: "#dbdbdb",
+								borderless: true,
+							}}
+						>
+							<Text style={styles.text}>{text}</Text>
+						</Pressable>
+					</TouchableOpacity>
 				</LinearGradient>
 			) : (
-				<Pressable
-					onPress={onPress}
+				<View
 					style={[styles.container, { backgroundColor: backGround }]}
 				>
-					<Text style={styles.text}>{text}</Text>
-				</Pressable>
+					<Pressable
+						onPress={onPress}
+						style={[styles.pressable]}
+						android_ripple={{ color: "#dbdbdb", borderless: true }}
+					>
+						<Text style={styles.text}>{text}</Text>
+					</Pressable>
+				</View>
 			)}
 		</>
 	);
@@ -45,15 +74,15 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: "white",
+		// backgroundColor: "white",
 		width: "100%",
 
-		padding: 15,
+		marginHorizontal: 15,
 		marginVertical: 5,
 		alignItems: "center",
 		borderRadius: 5,
 	},
-	pressable: { width: "100%", alignItems: "center" },
+	pressable: { width: "100%", paddingVertical: 15, alignItems: "center" },
 	text: {
 		fontWeight: "bold",
 		color: "white",

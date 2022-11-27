@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
 	Image,
+	ScrollView,
 	StyleSheet,
 	Text,
 	TextInput,
@@ -20,7 +21,7 @@ const SignInScreen = () => {
 		console.warn("Sign in");
 	};
 	return (
-		<View style={styles.root}>
+		<ScrollView contentContainerStyle={styles.root}>
 			<Image
 				source={Logo}
 				style={[
@@ -30,7 +31,7 @@ const SignInScreen = () => {
 				resizeMode="contain"
 			/>
 
-			<Text style={styles.or}>New User? Register</Text>
+			<Text style={styles.text}>New User? Register</Text>
 
 			<CustomInput
 				value={email}
@@ -43,9 +44,10 @@ const SignInScreen = () => {
 				setValue={setPassword}
 				placeholder="Password"
 				secureTextEntry
+				showIcon
 			/>
 
-			<Text>Forgot Password?</Text>
+			<Text style={styles.text}>Forgot Password?</Text>
 
 			<CustomButton
 				onPress={onSignInPressed}
@@ -64,7 +66,7 @@ const SignInScreen = () => {
 				text="Login With Facebook"
 				backGround="#7197E1"
 			/>
-		</View>
+		</ScrollView>
 	);
 };
 
@@ -82,5 +84,8 @@ const styles = StyleSheet.create({
 	},
 	or: {
 		margin: 10,
+	},
+	text: {
+		margin: 30,
 	},
 });
