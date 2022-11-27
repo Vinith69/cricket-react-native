@@ -13,9 +13,9 @@ import CustomButton from "../../components/CustomButton";
 import CustomInput from "../../components/CustomInput";
 import Logo from "../../../assets/logo.png";
 import * as ImagePicker from "expo-image-picker";
+import PicUploader from "../../components/PicUploader";
 
 const SignUpScreen = () => {
-	const { width, height } = useWindowDimensions();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -80,17 +80,12 @@ const SignUpScreen = () => {
 	return (
 		<ScrollView contentContainerStyle={styles.root}>
 			<View style={styles.viewContainer}>
-				<Button title="Pick image" onPress={pickImage} />
-				{image && (
-					<Image
-						source={{ uri: image }}
-						style={[
-							styles.logo,
-							{ width: width * 0.5, height: height * 0.25 },
-						]}
-						resizeMode="contain"
-					/>
-				)}
+				{/* <Button title="Pick image" onPress={pickImage} /> */}
+				<PicUploader
+					defaultImage={Logo}
+					onPress={pickImage}
+					image={image}
+				/>
 
 				<CustomInput
 					value={email}
