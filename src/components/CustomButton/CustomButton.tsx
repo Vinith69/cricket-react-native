@@ -18,6 +18,7 @@ interface CustomButtonProps {
 	};
 	backGround?: string;
 	borderRadius?: boolean;
+	marginRemoved?: boolean;
 }
 const CustomButton: React.FC<CustomButtonProps> = ({
 	onPress,
@@ -25,6 +26,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 	linearGradient,
 	backGround,
 	borderRadius = true,
+	marginRemoved = false,
 }) => {
 	return (
 		<>
@@ -36,6 +38,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 							position: "relative",
 							zIndex: -1,
 							borderRadius: borderRadius ? 5 : 0,
+							marginHorizontal: marginRemoved ? 0 : 15,
+							marginVertical: marginRemoved ? 0 : 5,
 						},
 					]}
 					locations={linearGradient.locations}

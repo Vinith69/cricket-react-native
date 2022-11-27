@@ -7,6 +7,7 @@ import {
 	StyleSheet,
 	Button,
 	PermissionsAndroid,
+	StatusBar,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import CustomButton from "../../components/CustomButton";
@@ -16,11 +17,15 @@ import * as ImagePicker from "expo-image-picker";
 import PicUploader from "../../components/PicUploader";
 
 const SignUpScreen = () => {
+	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [phone, setPhone] = useState("");
+	const [city, setCity] = useState("");
 
 	const [hasGalleryPermission, setHasGalleryPermission] = useState(false);
 	const [image, setImage]: any = useState(null);
+
+	const { height } = useWindowDimensions();
 
 	const askPermission = async () => {
 		const galleryStatus =
@@ -78,7 +83,16 @@ const SignUpScreen = () => {
 	// }
 
 	return (
-		<ScrollView contentContainerStyle={styles.root}>
+		<ScrollView
+			contentContainerStyle={[
+				styles.root,
+				{
+					minHeight:
+						height +
+						(StatusBar.currentHeight ? StatusBar.currentHeight : 0),
+				},
+			]}
+		>
 			<View style={styles.viewContainer}>
 				{/* <Button title="Pick image" onPress={pickImage} /> */}
 				<PicUploader
@@ -88,30 +102,41 @@ const SignUpScreen = () => {
 				/>
 
 				<CustomInput
+					value={name}
+					setValue={setName}
+					placeholder="Full Name"
+				/>
+
+				<CustomInput
 					value={email}
 					setValue={setEmail}
 					placeholder="Email"
 				/>
-
 				<CustomInput
-					value={password}
-					setValue={setPassword}
-					placeholder="Password"
-					secureTextEntry
-					showIcon
+					value={phone}
+					setValue={setPhone}
+					placeholder="Phone No"
+				/>
+				<CustomInput
+					value={city}
+					setValue={setCity}
+					placeholder="City"
 				/>
 			</View>
 
-			<CustomButton
-				onPress={onSignInPressed}
-				text="PROCEED"
-				linearGradient={{
-					colors: ["#FFBA8C", "#FE5C6A"],
-					start: [0.21, 0.21],
-					locations: [0, 1],
-				}}
-				borderRadius={false}
-			/>
+			<View style={styles.button}>
+				<CustomButton
+					onPress={onSignInPressed}
+					text="PROCEED"
+					linearGradient={{
+						colors: ["#FFBA8C", "#FE5C6A"],
+						start: [0.21, 0.21],
+						locations: [0, 1],
+					}}
+					borderRadius={false}
+					marginRemoved
+				/>
+			</View>
 		</ScrollView>
 	);
 };
@@ -130,6 +155,11 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		margin: 30,
+	},
+	button: {
+		marginTop: "auto",
+		width: "100%",
+		alignSelf: "flex-start",
 	},
 });
 
