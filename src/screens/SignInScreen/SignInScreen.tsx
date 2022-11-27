@@ -20,6 +20,15 @@ const SignInScreen = () => {
 	const onSignInPressed = () => {
 		console.warn("Sign in");
 	};
+
+	const onRegisterPressed = () => {
+		console.warn("Register pressed");
+	};
+
+	const onForgotPasswordPressed = () => {
+		console.warn("Forgot Password pressed");
+	};
+
 	return (
 		<ScrollView contentContainerStyle={styles.root}>
 			<Image
@@ -31,7 +40,12 @@ const SignInScreen = () => {
 				resizeMode="contain"
 			/>
 
-			<Text style={styles.text}>New User? Register</Text>
+			<Text style={styles.text}>
+				New User?{" "}
+				<Text onPress={onRegisterPressed} style={{ color: "#FE8579" }}>
+					Register
+				</Text>
+			</Text>
 
 			<CustomInput
 				value={email}
@@ -47,7 +61,12 @@ const SignInScreen = () => {
 				showIcon
 			/>
 
-			<Text style={styles.text}>Forgot Password?</Text>
+			<Text
+				onPress={onForgotPasswordPressed}
+				style={[styles.text, { color: "#4A90E2" }]}
+			>
+				Forgot Password?
+			</Text>
 
 			<CustomButton
 				onPress={onSignInPressed}
@@ -70,8 +89,6 @@ const SignInScreen = () => {
 	);
 };
 
-export default SignInScreen;
-
 const styles = StyleSheet.create({
 	root: {
 		paddingTop: 50,
@@ -84,8 +101,11 @@ const styles = StyleSheet.create({
 	},
 	or: {
 		margin: 10,
+		color: "grey",
 	},
 	text: {
 		margin: 30,
 	},
 });
+
+export default SignInScreen;

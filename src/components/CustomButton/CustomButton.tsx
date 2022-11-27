@@ -17,12 +17,14 @@ interface CustomButtonProps {
 		locations?: number[];
 	};
 	backGround?: string;
+	borderRadius?: boolean;
 }
 const CustomButton: React.FC<CustomButtonProps> = ({
 	onPress,
 	text,
 	linearGradient,
 	backGround,
+	borderRadius = true,
 }) => {
 	return (
 		<>
@@ -30,7 +32,11 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 				<LinearGradient
 					style={[
 						styles.container,
-						{ position: "relative", zIndex: -1 },
+						{
+							position: "relative",
+							zIndex: -1,
+							borderRadius: borderRadius ? 5 : 0,
+						},
 					]}
 					locations={linearGradient.locations}
 					start={linearGradient.start}
@@ -39,7 +45,12 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 					<TouchableOpacity
 						style={[
 							// styles.container,
-							{ width: "100%", position: "relative", zIndex: 1 },
+							{
+								borderRadius: borderRadius ? 5 : 0,
+								width: "100%",
+								position: "relative",
+								zIndex: 1,
+							},
 						]}
 						onPress={() => {}}
 					>
@@ -57,7 +68,13 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 				</LinearGradient>
 			) : (
 				<View
-					style={[styles.container, { backgroundColor: backGround }]}
+					style={[
+						styles.container,
+						{
+							backgroundColor: backGround,
+							borderRadius: borderRadius ? 5 : 0,
+						},
+					]}
 				>
 					<Pressable
 						onPress={onPress}
@@ -80,8 +97,8 @@ const styles = StyleSheet.create({
 		marginHorizontal: 15,
 		marginVertical: 5,
 		alignItems: "center",
-		borderRadius: 5,
 	},
+
 	pressable: { width: "100%", paddingVertical: 15, alignItems: "center" },
 	text: {
 		fontWeight: "bold",
